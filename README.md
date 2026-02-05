@@ -73,8 +73,13 @@ Run locally:
 cd backend
 ```
 
+```bash
 source venv/bin/activate
+```
+
+```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
 
 Swagger UI:
 http://<server-ip>:8000/docs
