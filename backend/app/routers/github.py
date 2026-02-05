@@ -13,16 +13,18 @@ def list_repos(username: str):
     url = f"https://api.github.com/users/{username}/repos"
 
     headers = {
-        "Authorization": f"Bearer {settings.github_token}",
         "Accept": "application/vnd.github+json"
     }
 
-    response = requests.get(url, headers=headers, timeout=10)
+    if settings.github_token:
+        headers["Authorization"] = f"Bearer {settings.github_token}"
+
+    response = requests.get(url, headers=headers)
 
     if response.status_code != 200:
         raise HTTPException(
             status_code=response.status_code,
-            detail="GitHub API request failed"
+            detail="Failed to fetch repositories from GitHub"
         )
 
     repos = response.json()
