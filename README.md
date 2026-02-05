@@ -65,6 +65,21 @@ Later stages will introduce:
 
 ---
 
+### Backend API
+
+Run locally:
+
+```bash
+cd backend
+```
+
+source venv/bin/activate
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+Swagger UI:
+http://<server-ip>:8000/docs
+
+
 ## 📦 Project Structure (Initial)
 
 ```
