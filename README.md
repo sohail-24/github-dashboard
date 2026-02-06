@@ -129,6 +129,15 @@ Tested using:
 
 Status: Foundation Phase Complete
 
+## 📡 API Endpoints
+
+GET /health
+→ Service health status
+
+GET /github/repos?username=<github-username>
+→ Returns public repositories with metadata
+
+
 
 ## 📌 Notes
 
