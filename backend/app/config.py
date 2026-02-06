@@ -1,12 +1,20 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     app_name: str = "GitHub Dashboard API"
-    environment: str = "development"
-    github_token: str | None = None
+    app_env: str = "dev"
 
-    class Config:
-        env_file = ".env"
+    # GitHub
+    github_token: str | None = None
+    github_api_base: str = "https://api.github.com"
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_prefix="",
+        extra="forbid",   # strict by design
+    )
+
 
 settings = Settings()
 
