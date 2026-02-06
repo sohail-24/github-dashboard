@@ -129,6 +129,11 @@ Tested using:
 
 Status: Foundation Phase Complete
 
+- Backend container image published to Docker Hub
+
+Docker Image:
+sohail28/github-dashboard-backend:1.0
+
 ## 📡 API Endpoints
 
 GET /health
