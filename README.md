@@ -175,6 +175,13 @@ This setup ensures:
 * Automated container publishing
 * Production-ready CI pipeline
 
+📦 Release Strategy
+
+Backend images are versioned using Git tags (vX.Y.Z).
+Each release produces:
+- Immutable versioned image
+- latest tag for convenience
+
 
 ## 📡 API Endpoints
 
