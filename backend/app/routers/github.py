@@ -1,41 +1,21 @@
 from fastapi import APIRouter, HTTPException
-import requests
-from app.config import settings
+from typing import List
 
-router = APIRouter(prefix="/github", tags=["github"])
+from app.services.github import get_repositories
+from app.models.github import GitHubRepo
+from app.logger import logger
+
+router = APIRouter(prefix="/github", tags=["GitHub"])
 
 
-@router.get("/repos")
-def list_repos(username: str):
-    """
-    Fetch public repositories for a GitHub user
-    """
-    url = f"https://api.github.com/users/{username}/repos"
-
-    headers = {
-        "Accept": "application/vnd.github+json"
-    }
-
-    if settings.github_token:
-        headers["Authorization"] = f"Bearer {settings.github_token}"
-
-    response = requests.get(url, headers=headers)
-
-    if response.status_code != 200:
+@router.get("/repos", response_model=List[GitHubRepo])
+def github_repos(username: str):
+    try:
+        return get_repositories(username)
+    except Exception:
+        logger.exception("Failed to fetch repositories")
         raise HTTPException(
-            status_code=response.status_code,
-            detail="Failed to fetch repositories from GitHub"
+            status_code=502,
+            detail="Failed to fetch data from GitHub API"
         )
-
-    repos = response.json()
-
-    return [
-        {
-            "name": repo["name"],
-            "stars": repo["stargazers_count"],
-            "language": repo["language"],
-            "url": repo["html_url"],
-        }
-        for repo in repos
-    ]
 

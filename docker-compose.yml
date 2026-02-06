@@ -2,11 +2,12 @@ version: "3.9"
 
 services:
   backend:
-    image: sohail28/github-dashboard-backend:1.0
+    image: sohail28/github-dashboard-backend:1.0.0
     container_name: github-dashboard-backend
-    ports:
-      - "8000:8000"
     environment:
       - ENV=production
+      - APP_VERSION=1.0.0
+    ports:
+      - "8000:8000"
     restart: unless-stopped
 

@@ -1,34 +1,19 @@
-from fastapi import FastAPI, HTTPException, Query
-import logging
 
-from app.services.github import get_repositories
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
-)
-
-logger = logging.getLogger("github-dashboard")
+from fastapi import FastAPI
+import os
 
 app = FastAPI(title="GitHub Dashboard API")
 
+APP_VERSION = os.getenv("APP_VERSION", "dev")
 
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
-
-@app.get("/github/repos")
-def github_repos(
-    username: str = Query(..., description="GitHub username")
-):
-    try:
-        return get_repositories(username)
-
-    except Exception:
-        logger.exception("Failed to fetch repositories")
-        raise HTTPException(
-            status_code=502,
-            detail="Failed to fetch data from GitHub API",
-        )
+@app.get("/version")
+def version():
+    return {
+        "service": "github-dashboard-backend",
+        "version": APP_VERSION
+    }
 

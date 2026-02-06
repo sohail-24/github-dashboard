@@ -1,5 +1,7 @@
 # 1. Use lightweight Python image
 FROM python:3.11-slim
+ARG APP_VERSION=dev
+ENV APP_VERSION=$APP_VERSION
 
 # 2. Set working directory
 WORKDIR /app
