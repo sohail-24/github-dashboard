@@ -134,6 +134,48 @@ Status: Foundation Phase Complete
 Docker Image:
 sohail28/github-dashboard-backend:1.0
 
+
+![Build & Push Backend Image]
+
+```bash
+(https://github.com/sohail-24/github-dashboard/actions/workflows/docker-backend.yml/badge.svg)
+```
+
+## 🔁 CI/CD Pipeline (GitHub Actions)
+
+This repository uses **GitHub Actions** to automatically build and publish the backend Docker image.
+
+### 🚀 What happens on every `push` to `main`?
+
+1. GitHub Actions runner starts
+2. Backend Docker image is built from `backend/Dockerfile`
+3. Image is tagged using Docker Hub namespace
+4. Image is pushed to Docker Hub automatically
+
+### 🐳 Docker Image
+
+```
+sohail28/github-dashboard-backend:latest
+```
+
+### 🔐 Security
+
+* Docker Hub credentials are stored securely using **GitHub Actions Secrets**
+* No secrets are hardcoded in the repository
+
+### 📂 Workflow File
+
+```
+.github/workflows/docker-backend.yml
+```
+
+This setup ensures:
+
+* Reproducible builds
+* Automated container publishing
+* Production-ready CI pipeline
+
+
 ## 📡 API Endpoints
 
 GET /health
