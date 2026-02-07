@@ -5,7 +5,10 @@ from app.services.github import get_repositories
 from app.models.github import GitHubRepo
 from app.logger import logger
 
-router = APIRouter(prefix="/github", tags=["GitHub"])
+# IMPORTANT:
+# ❌ NO prefix here
+# Prefix is added in main.py using include_router()
+router = APIRouter(tags=["GitHub"])
 
 
 @router.get("/repos", response_model=List[GitHubRepo])

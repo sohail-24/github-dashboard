@@ -2,12 +2,23 @@ version: "3.9"
 
 services:
   backend:
-    image: sohail28/github-dashboard-backend:1.0.0
+    build: ./backend
     container_name: github-dashboard-backend
+    env_file:
+      - backend/.env
     environment:
-      - ENV=production
-      - APP_VERSION=1.0.0
+      - APP_VERSION=dev
+      - CORS_ORIGINS=http://localhost,http://frontend
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: github-dashboard-frontend
     ports:
-      - "8000:8000"
+      - "80:80"
+    depends_on:
+      - backend
     restart: unless-stopped
 
